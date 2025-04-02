@@ -1,0 +1,77 @@
+-- 실행계획 수집
+
+explain plan FOR
+SELECT *
+  FROM emp e
+ WHERE e.empno = 999999
+   AND e.deptno = 10
+;
+
+-- 실행계획 조회
+SELECT * FROM table(dbms_xplan.display);
+
+
+-- basic format으로 조회
+SELECT *
+  FROM table(dbms_xplan.display(NULL,NULL, 'advanced'))
+;
+
+*. PLAN 정보	ID	각 Operation의 ID. *가 있는 경우 추가 정보란에 해당 ID의 정보를 보여줌
+-. Operation	로우 단위의 액세스 정보를 보여줌
+-. Name	액세스 하는 Object의 정보를 보여줌
+-. Rows	각 Operation에서 예상하는 Rows
+-. Bytes	각 Operation에서 예상하는 Byte
+-. Cost(% CPU)	각 Oepration에서 예상하는 Cost(괄호안의 내용은 CPU Cost의 예상치)
+-. Time	각 Operation에서 예상하는 수행시간
+
+*. 추가 정보	Predicate
+-. Information	SQL에서 WHERE절에 사용되는 조건들이 각 Operation에 적용되는 정보를 보여줌
+-. SQL 튜닝 시 가장 필요한 정보이며 가장 깅력한 정보임
+-. 개발자들이 반드시 알아야 하고 이해하고 있어야 하는 정보
+-. 10046 Trace에서도 보여주지 못하는 정보임
+;
+\
+explain plan FOR
+SELECT *
+  FROM emp e
+ WHERE e.empno_varchar = 111;
+
+SELECT * FROM table(dbms_xplan.display);
+
+ex\plain plan FOR
+SELECT *
+  FROM emp e
+     , dept d
+ WHERE e.deptno = d.deptno
+   AND d.deptno = 10
+;
+
+SELECT * FROM table(dbms_xplan.display);
+
+
+explain plan FOR
+SELECT *
+  FROM (
+         SELECT *
+           FROM (   SELECT /*+ index(e emp_n2) */
+                           e.empno
+			             , e.job
+			             , d.deptno
+			          FROM emp e
+			             , dept d
+			         WHERE e.deptno = d.deptno
+                ) depth_1
+       ) local              
+ WHERE LOCAL.deptno = '10'        
+;
+          
+SELECT * FROM table(dbms_xplan.display());
+
+
+
+
+
+
+
+
+
