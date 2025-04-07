@@ -1,5 +1,5 @@
-DROP TABLE emp PURGE;
-DROP TABLE dept PURGE;
+--DROP TABLE emp PURGE;
+--DROP TABLE dept PURGE;
 
 
 
