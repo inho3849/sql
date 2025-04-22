@@ -19,7 +19,6 @@ SQL Error [2421] [42000]: ORA-02421: 누락 혹은 부당한 스키마 권한 �
 
   Error : 2421, Position : 33, SQL = ALTER SESSION SET CURRENT_SCHEMA=PUBLIC, Original SQL = ALTER SESSION SET CURRENT_SCHEMA=PUBLIC, Error Message = ORA-02421: 누락 혹은 부당한 스키마 권한 식별자
 
-  ORA-02421: 누락 혹은 부당한 스키마 권한 식별자
 
 
 ;
@@ -28,7 +27,6 @@ SELECT *
   
   ;
 
-SELECT sysdate FROM   
   
 
   

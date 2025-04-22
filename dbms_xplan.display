@@ -64,6 +64,7 @@ SELECT *
        ) local              
  WHERE LOCAL.deptno = '10'        
 ;
+
           
 SELECT * FROM table(dbms_xplan.display());
 

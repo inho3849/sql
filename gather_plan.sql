@@ -23,4 +23,4 @@ SELECT *
   , NULL, 'advanced allstats last'))
 ;
 
-;;;;
+;;
